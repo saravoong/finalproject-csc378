@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BakingBG_0: 6207988435691404699
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
