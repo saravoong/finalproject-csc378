@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ProgressBarCustard : MonoBehaviour
+public class ProgressBarMixing : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] public FillingCustardTransition custardTransition;
     [SerializeField] private Button nextStepButton;
+    [SerializeField] private GameObject arrow;
     public AudioClip doneSoundEffect;
     private AudioSource audioSource;
 
@@ -19,12 +20,13 @@ public class ProgressBarCustard : MonoBehaviour
         slider.value += currentValue;
 
         if (slider.value >= slider.maxValue) {
-            ShowCustard();
+            ShowFilling();
         }
     }
 
-    private void ShowCustard()
+    private void ShowFilling()
     {
+        arrow.SetActive(false);
         audioSource.PlayOneShot(doneSoundEffect);
         StartCoroutine(custardTransition.FadeIn()); 
         Invoke("EnableNextStepButton", 1.5f);

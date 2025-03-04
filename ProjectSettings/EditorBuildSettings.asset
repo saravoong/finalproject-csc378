@@ -9,11 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/PlacingCustard.unity
+    path: Assets/Scenes/BakingScenes/PlacingCustard.unity
     guid: 0fe75a59e9efa446b945ac5b22f4bb71
   - enabled: 1
-    path: Assets/Scenes/PlacingStrawberries.unity
+    path: Assets/Scenes/BakingScenes/PlacingStrawberries.unity
     guid: 935669f54397f4cf28eb06c944a22b45
+  - enabled: 1
+    path: Assets/Scenes/BakingScenes/AddIngredients.unity
+    guid: c3e9a4f6eed484bc192bb4b911d3b1f5
+  - enabled: 1
+    path: Assets/Scenes/BakingScenes/MixingIngredients.unity
+    guid: 4bf07827856274d449f6bc25cadf3896
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
