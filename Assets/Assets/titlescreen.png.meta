@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1be3c7b49bc7c438b8b5f7af592bf40a
+guid: 9c4969d9ff2e546f3a923acbe517a493
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5749797915405543923
-    second: critter tilt_0
+      213: 7811794034183270578
+    second: titlescreen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: critter tilt_0
+      name: titlescreen_0
       rect:
         serializedVersion: 2
-        x: 293
-        y: 15
-        width: 363
-        height: 692
+        x: 0
+        y: 0
+        width: 5100
+        height: 3300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f967068db26bcf40800000000000000
-      internalID: 5749797915405543923
+      spriteID: 2b072021941196c60800000000000000
+      internalID: 7811794034183270578
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      critter tilt_0: 5749797915405543923
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
