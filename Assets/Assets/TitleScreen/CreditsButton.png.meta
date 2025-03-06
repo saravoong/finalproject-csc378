@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6d188512e5957494cb8dd7702eed0224
+guid: cb9e0e51dd53643f19079e2932dfba1a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 713466727378512519
-    second: idlestaff4_0
+      213: -1901398592812892374
+    second: CreditsButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idlestaff4_0
+      name: CreditsButton_0
       rect:
         serializedVersion: 2
-        x: 115
-        y: 67
-        width: 240
-        height: 384
+        x: 1501
+        y: 438
+        width: 391
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 78ae47c553eb6e900800000000000000
-      internalID: 713466727378512519
+      spriteID: a2fb5facd00ec95e0800000000000000
+      internalID: -1901398592812892374
       vertices: []
       indices: 
       edges: []
