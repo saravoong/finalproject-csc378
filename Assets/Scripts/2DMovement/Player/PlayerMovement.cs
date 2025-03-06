@@ -44,28 +44,32 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed *= sprintMultiplier;
         Vector3 startPos = transform.position;
         Vector3 targetPos = startPos + new Vector3(direction.x, direction.y, 0);
-        
+
+        animator.SetBool("WalkUp", false);
+        animator.SetBool("WalkDown", false);
+        animator.SetBool("WalkLeft", false);
+
         if (direction.y > 0)
         {
-            animator.SetTrigger("WalkUp");
+            animator.SetBool("WalkUp", true);
             spriteRenderer.flipX = false;
         }
         else if (direction.y < 0)
         {
-            animator.SetTrigger("WalkDown");
+            animator.SetBool("WalkDown", true);
             spriteRenderer.flipX = false;
         }
         else if (direction.x < 0)
         {
-            animator.SetTrigger("WalkLeft");
+            animator.SetBool("WalkLeft", true);
             spriteRenderer.flipX = false;
         }
         else if (direction.x > 0)
         {
-            animator.SetTrigger("WalkLeft");
+            animator.SetBool("WalkLeft", true);
             spriteRenderer.flipX = true;
         }
-        
+
         if (IsBlocked(targetPos))
         {
             if (blockedSound != null && Time.time - lastBlockedSoundTime >= blockedSoundCadence)
@@ -73,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
                 AudioSource.PlayClipAtPoint(blockedSound, transform.position, blockedSoundVolume);
                 lastBlockedSoundTime = Time.time;
             }
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkLeft", false);
             isMoving = false;
             yield break;
         }
@@ -86,8 +93,13 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
         transform.position = targetPos;
+
+        animator.SetBool("WalkUp", false);
+        animator.SetBool("WalkDown", false);
+        animator.SetBool("WalkLeft", false);
         isMoving = false;
     }
+
 
     bool IsBlocked(Vector3 targetPos)
     {

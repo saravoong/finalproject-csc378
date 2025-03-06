@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - DropArea
+  - Collectible
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
-  - 
+  - Collectible
+  - Enemy
   - 
   - 
   - 
@@ -41,6 +43,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 2085213501
+    locked: 0
+  - name: Obstacles
+    uniqueID: 3108266373
+    locked: 0
+  - name: Enemy
+    uniqueID: 969896285
+    locked: 0
+  - name: Player
+    uniqueID: 1920781881
     locked: 0
   m_RenderingLayers:
   - Default
