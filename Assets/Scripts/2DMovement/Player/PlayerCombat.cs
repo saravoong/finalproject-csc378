@@ -56,7 +56,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
-    
+    /*
     void OnDrawGizmosSelected()
     {
         if (playerMovement == null)
@@ -72,4 +72,5 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(targetPos, cellSize);
     }
+    */
 }
