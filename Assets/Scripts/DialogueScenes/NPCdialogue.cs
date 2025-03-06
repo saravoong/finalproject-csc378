@@ -7,15 +7,25 @@ using TMPro;
 public class NPCdialogue : MonoBehaviour
 {
     public GameObject dialoguePanel;
-    public TextMeshProUGUI dialogueText;
-    public string[] dialogue;
+    public GameObject instructionPanel;
+    public TextMeshProUGUI dialogueText;    // dialogue: actual dialogue
+    public TextMeshProUGUI speakerText;     // speaker: ie whos talking
+    public GameObject hideObj;              // to hide npc after talk(if needed)
+    public string[] dialogue;               
+    public string[] speaker;
     private int index;
     public float wordSpeed;
     public bool playerIsClose;
     public GameObject continueButton;
     
     void Update() {
-        if (Input.GetKeyDown(KeyCode.E) && playerIsClose) {
+        if (playerIsClose) {
+            instructionPanel.SetActive(true);
+        } else {
+            instructionPanel.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T) && playerIsClose) {
             if (dialoguePanel.activeInHierarchy) {
                 zeroText();
             } else {
@@ -31,11 +41,17 @@ public class NPCdialogue : MonoBehaviour
 
     public void zeroText() {
         dialogueText.text = "";
+        speakerText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
+        hideObj.SetActive(false);
+        if (instructionPanel.activeInHierarchy) {
+            instructionPanel.SetActive(false);
+        }
     }
 
     IEnumerator Typing() {
+        speakerText.text = speaker[index];
         foreach(char letter in dialogue[index].ToCharArray()) {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
@@ -54,15 +70,21 @@ public class NPCdialogue : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.name == "player") {
+        if (other.gameObject.name == "Player") {
             playerIsClose = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.name == "player") {
+    // forcing player to finish convo
+    // private void OnTriggerExit2D(Collider2D other) {
+    //     if (other.gameObject.name == "Player") {
+    //         playerIsClose = false;
+    //         zeroText();
+    //     }
+    // }
+        private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.name == "Player") {
             playerIsClose = false;
-            zeroText();
         }
     }
 

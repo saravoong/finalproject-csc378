@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      beetcutscene_0: -4610266494305153886
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

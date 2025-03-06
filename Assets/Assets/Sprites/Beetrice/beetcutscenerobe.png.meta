@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      beetcutscenerobe_0: 833443650856176385
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
