@@ -22,7 +22,7 @@ public class FadingTransparency : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeIn()
+    public IEnumerator FadeIn()
     {
         float alphaVal = yourSpriteRenderer.color.a;
         Color tmp = yourSpriteRenderer.color;
@@ -37,7 +37,7 @@ public class FadingTransparency : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeOut()
+    public IEnumerator FadeOut()
     {
         float alphaVal = yourSpriteRenderer.color.a;
         Color tmp = yourSpriteRenderer.color;
