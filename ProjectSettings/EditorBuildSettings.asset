@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BakingScenes/Oven.unity
     guid: 702caa950d1ee4ab9a5e0b434465773b
+  - enabled: 1
+    path: Assets/Scenes/IntroCutscene.unity
+    guid: a2f3351b727234c8e89ecec134d93fd5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0

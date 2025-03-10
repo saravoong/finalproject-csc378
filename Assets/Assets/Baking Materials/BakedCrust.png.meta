@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BakedCrust_0: 2830116566259354945
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

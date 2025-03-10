@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      OvenGlassThingy_0: 7149902739964306820
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
