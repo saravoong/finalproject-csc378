@@ -41,9 +41,12 @@ public class PlayerMovement : MonoBehaviour
         isMoving = true;
         float currentSpeed = moveSpeed;
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-            currentSpeed *= sprintMultiplier;
-        Vector3 startPos = transform.position;
+        currentSpeed *= sprintMultiplier;
+        // Compute the grid center using transform.position plus the collider's offset.
+        Vector3 gridCenter = transform.position + (Vector3)boxCollider.offset;
+        Vector3 startPos = gridCenter;
         Vector3 targetPos = startPos + new Vector3(direction.x, direction.y, 0);
+
 
         animator.SetBool("WalkUp", false);
         animator.SetBool("WalkDown", false);
@@ -88,11 +91,14 @@ public class PlayerMovement : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < timeToMove)
         {
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / timeToMove);
+            // Interpolate between startPos and targetPos (which are the desired grid centers).
+            Vector3 newGridCenter = Vector3.Lerp(startPos, targetPos, elapsedTime / timeToMove);
+            // Set transform.position so that the collider's center equals newGridCenter.
+            transform.position = newGridCenter - (Vector3)boxCollider.offset;
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        transform.position = targetPos;
+        transform.position = targetPos - (Vector3)boxCollider.offset;
 
         animator.SetBool("WalkUp", false);
         animator.SetBool("WalkDown", false);
@@ -114,4 +120,23 @@ public class PlayerMovement : MonoBehaviour
         }
         return false;
     }
+
+    void OnDrawGizmos()
+    {
+        if (boxCollider == null)
+            return;
+
+        // Draw the collider's current center bounds in green.
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(boxCollider.bounds.center, boxCollider.bounds.size);
+
+        // If a move direction exists, draw the target overlap box in red.
+        if (lastMoveDirection != Vector2.zero)
+        {
+            Vector3 targetPos = boxCollider.bounds.center + new Vector3(lastMoveDirection.x, lastMoveDirection.y, 0);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(targetPos, boxCollider.bounds.size);
+        }
+    }
+
 }
