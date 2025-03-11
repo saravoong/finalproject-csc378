@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 // tutorial: https://www.youtube.com/watch?v=1nFNOyCalzo&t=35s
 public class NPCdialogue : MonoBehaviour
@@ -16,7 +17,7 @@ public class NPCdialogue : MonoBehaviour
     private int index;
     public float wordSpeed;
     public bool playerIsClose;
-    public GameObject continueButton;
+    // public GameObject continueButton;
     
     void Update() {
         if (playerIsClose) {
@@ -34,9 +35,19 @@ public class NPCdialogue : MonoBehaviour
             }
         } 
 
-        if (dialogueText.text == dialogue[index]) {
-            continueButton.SetActive(true);
+        if (dialoguePanel.activeInHierarchy) {
+            if (Input.GetMouseButtonDown(0)) {
+                if (dialogueText.text == dialogue[index]) {
+                    NextLine();
+                } else {
+                    StopAllCoroutines();
+                    dialogueText.text = dialogue[index];
+                }
+            }
         }
+        // if (dialogueText.text == dialogue[index]) {
+        //     continueButton.SetActive(true);
+        // }
     }
 
     public void zeroText() {
@@ -59,12 +70,16 @@ public class NPCdialogue : MonoBehaviour
     }
 
     public void NextLine() {
-        continueButton.SetActive(false);
+        // continueButton.SetActive(false);
         if (index < dialogue.Length - 1) {
             index++;
             dialogueText.text = "";
             StartCoroutine(Typing());
         } else {
+            string activeScene = SceneManager.GetActiveScene().name;
+            if (activeScene == "forestScene") {
+                SceneManager.LoadScene(11);
+            }
             zeroText();
         }
     }

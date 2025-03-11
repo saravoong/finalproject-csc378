@@ -364,15 +364,15 @@ MonoBehaviour:
   dialogue:
   - Mother often told a tale. A tale of the Legendary Strawberry, shrouded deep in
     the forest.
-  - '"Beetrice, taccording to the legend, this is pinnacle of all fruits. The crown
+  - '"Beetrice, according to the legend, this is pinnacle of all fruits. The crown
     jewel."'
   - '"The remedy of all ills, the bringer uncomparable bliss."'
   - It's a story I always remember.
   - Present day (blank screen)
-  - 'Yaaawn *hears a commotion outside* '
-  - Beetrice sprints outside
-  - 'Hear ye competition '
-  - I gotta get the famous strawberry to ensure I win this competition!
+  - 'Yaaawn. *hears a commotion outside* '
+  - Beetrice sprints outside.
+  - 'Hear ye competition. '
+  - I have to get the famous strawberry to ensure I win this competition!
   speaker:
   - ~~~
   - Mother
