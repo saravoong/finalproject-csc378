@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UnbakedCrust_0: 7400217545913435855
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
