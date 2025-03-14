@@ -15,6 +15,9 @@ public class dialoguescene : MonoBehaviour
     public string[] speaker;
     private int index;
     public float wordSpeed;
+    public Image backgroundImage;
+    public Sprite[] backgroundSprites;
+
     // public bool playerIsClose;
     // public GameObject continueButton;
     
@@ -26,6 +29,9 @@ public class dialoguescene : MonoBehaviour
 
     void StartDialogue() {
         index = 0;
+        if(backgroundSprites.Length > 0 && backgroundImage != null) {
+            backgroundImage.sprite = backgroundSprites[index];
+        }
         StartCoroutine(Typing());
     }
 
@@ -63,6 +69,9 @@ public class dialoguescene : MonoBehaviour
         if (index < dialogue.Length - 1) {
             index++;
             dialogueText.text = "";
+            if(backgroundSprites.Length > index && backgroundImage != null) {
+                backgroundImage.sprite = backgroundSprites[index];
+            }
             StartCoroutine(Typing());
         } else {
             //zeroText();

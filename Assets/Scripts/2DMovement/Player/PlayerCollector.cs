@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class PlayerCollector : MonoBehaviour
 {
-    public PlayerMovement playerMovement;
+    public GridBased gridBased;
     public LayerMask collectibleLayer;
     public Vector2 cellSize = new Vector2(0.9f, 0.9f);
+    public BoxCollider2D frontFacingCollider;
+
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Vector2 direction = playerMovement.lastMoveDirection;
+            Vector2 direction = gridBased.lastDir;
             if (direction == Vector2.zero)
                 direction = Vector2.up;
             
-            Vector3 targetPos = transform.position + new Vector3(direction.x, direction.y, 0);
-            targetPos = new Vector3(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y), targetPos.z);
+            Vector3 targetPos = frontFacingCollider.bounds.center;
 
             Collider2D hit = Physics2D.OverlapBox(targetPos, cellSize, 0f, collectibleLayer);
             if (hit != null && hit.CompareTag("Collectible"))
@@ -28,15 +29,14 @@ public class PlayerCollector : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        if (playerMovement == null)
+        if (gridBased == null)
             return;
         
-        Vector2 direction = playerMovement.lastMoveDirection;
+        Vector2 direction = gridBased.lastDir;
         if (direction == Vector2.zero)
             direction = Vector2.up;
         
-        Vector3 targetPos = transform.position + new Vector3(direction.x, direction.y, 0);
-        targetPos = new Vector3(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y), targetPos.z);
+        Vector3 targetPos = frontFacingCollider.bounds.center;
         
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(targetPos, cellSize);

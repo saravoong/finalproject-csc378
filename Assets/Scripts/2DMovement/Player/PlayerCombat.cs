@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public PlayerMovement playerMovement;
+    public GridBased gridBasedMovement;
     public Animator animator; 
     public SpriteRenderer spriteRenderer;
     public LayerMask enemyLayer; 
     public Vector2 cellSize = new Vector2(0.9f, 0.9f); 
+    public BoxCollider2D frontFacingCollider;
+
     
     void Update()
     {
@@ -18,7 +20,7 @@ public class PlayerCombat : MonoBehaviour
     
     void Attack()
     {
-        Vector2 lastDir = playerMovement.lastMoveDirection;
+        Vector2 lastDir = gridBasedMovement.lastDir;
         if (lastDir == Vector2.zero)
             lastDir = Vector2.down;
         
@@ -43,8 +45,7 @@ public class PlayerCombat : MonoBehaviour
             spriteRenderer.flipX = true;
         }
         
-        Vector3 targetPos = transform.position + new Vector3(lastDir.x, lastDir.y, 0);
-        targetPos = new Vector3(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y), targetPos.z);
+        Vector3 targetPos = frontFacingCollider.bounds.center;
         
         Collider2D enemyHit = Physics2D.OverlapBox(targetPos, cellSize, 0f, enemyLayer);
         if (enemyHit != null && enemyHit.CompareTag("Enemy"))
@@ -56,21 +57,4 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
-    /*
-    void OnDrawGizmosSelected()
-    {
-        if (playerMovement == null)
-            return;
-            
-        Vector2 lastDir = playerMovement.lastMoveDirection;
-        if (lastDir == Vector2.zero)
-            lastDir = Vector2.down;
-        
-        Vector3 targetPos = transform.position + new Vector3(lastDir.x, lastDir.y, 0);
-        targetPos = new Vector3(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y), targetPos.z);
-        
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(targetPos, cellSize);
-    }
-    */
 }
