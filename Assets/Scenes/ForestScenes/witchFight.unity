@@ -13296,7 +13296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &756836197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13497,13 +13497,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ced223894d05497d8dff4d5c4e92ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 756836199}
+  gridBasedMovement: {fileID: 0}
   animator: {fileID: 756836202}
   spriteRenderer: {fileID: 756836197}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
   cellSize: {x: 0.9, y: 0.9}
+  frontFacingCollider: {fileID: 0}
 --- !u!114 &756836205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13530,11 +13531,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f6c52042ffe4f62a4094ddd0a94ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 756836199}
+  gridBased: {fileID: 0}
   collectibleLayer:
     serializedVersion: 2
     m_Bits: 128
   cellSize: {x: 0.9, y: 0.9}
+  frontFacingCollider: {fileID: 0}
 --- !u!4 &757874761 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6621799151950608581, guid: d8d4728b63f7e40ff8e016332155ad81, type: 3}
@@ -36164,6 +36166,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144862903}
   m_CullTransparentMesh: 1
+--- !u!1001 &1151954140
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.35531515
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0491351
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7106363317782748962, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+--- !u!4 &1151954141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+  m_PrefabInstance: {fileID: 1151954140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1201878139
 GameObject:
   m_ObjectHideFlags: 0
@@ -37060,7 +37124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a204ce25673f435990f85e4d5545f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 756836198}
+  player: {fileID: 1151954141}
 --- !u!1 &2103775508
 GameObject:
   m_ObjectHideFlags: 0
@@ -37163,3 +37227,4 @@ SceneRoots:
   - {fileID: 203892728}
   - {fileID: 1493355634}
   - {fileID: 1812140655}
+  - {fileID: 1151954140}
