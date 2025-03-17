@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 792979889421572672}
   - component: {fileID: 8959261540655342293}
   - component: {fileID: 74808545331296500}
+  - component: {fileID: 8517862131412237272}
   m_Layer: 0
   m_Name: New Piskel (6)_0
   m_TagString: Untagged
@@ -100,4 +101,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b18f3a771eea4a919f701364edd2c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+--- !u!95 &8517862131412237272
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867277332327967796}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8966589e5864148bdbc654810ab30d87, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
