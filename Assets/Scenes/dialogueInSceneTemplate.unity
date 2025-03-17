@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 97033076}
   - component: {fileID: 97033077}
   m_Layer: 0
-  m_Name: player
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  canMove: 1
 --- !u!212 &97033074
 SpriteRenderer:
   m_ObjectHideFlags: 0

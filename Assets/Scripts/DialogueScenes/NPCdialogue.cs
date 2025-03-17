@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 // tutorial: https://www.youtube.com/watch?v=1nFNOyCalzo&t=35s
 public class NPCdialogue : MonoBehaviour
 {
+    public panelFadeOut levelLoader;
     public GameObject dialoguePanel;
     public GameObject instructionPanel;
     public TextMeshProUGUI dialogueText;    // dialogue: actual dialogue
@@ -55,7 +56,9 @@ public class NPCdialogue : MonoBehaviour
         speakerText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
-        hideObj.SetActive(false);
+        if (hideObj != null) {
+            hideObj.SetActive(false);
+        }
         if (instructionPanel.activeInHierarchy) {
             instructionPanel.SetActive(false);
         }
@@ -78,7 +81,8 @@ public class NPCdialogue : MonoBehaviour
         } else {
             string activeScene = SceneManager.GetActiveScene().name;
             if (activeScene == "forestScene") {
-                SceneManager.LoadScene(11);
+                //SceneManager.LoadScene(11);
+                levelLoader.LoadNextLevel();
             }
             zeroText();
         }
@@ -97,7 +101,7 @@ public class NPCdialogue : MonoBehaviour
     //         zeroText();
     //     }
     // }
-        private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.name == "Player") {
             playerIsClose = false;
         }
