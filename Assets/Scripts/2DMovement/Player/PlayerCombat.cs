@@ -51,9 +51,14 @@ public class PlayerCombat : MonoBehaviour
         if (enemyHit != null && enemyHit.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = enemyHit.GetComponent<EnemyHealth>();
+            BossHealth bossHealth = enemyHit.GetComponent<BossHealth>();
+
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(1);
+            } else if (bossHealth != null)
+            {
+                bossHealth.TakeDamage(1);
             }
         }
     }
