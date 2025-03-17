@@ -134,11 +134,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 startPos = gridCenter;
         Vector3 targetPos = startPos + new Vector3(direction.x, direction.y, 0);
 
-
-        animator.SetBool("WalkUp", false);
-        animator.SetBool("WalkDown", false);
-        animator.SetBool("WalkLeft", false);
-
         if (direction.y > 0)
         {
             animator.SetBool("WalkUp", true);

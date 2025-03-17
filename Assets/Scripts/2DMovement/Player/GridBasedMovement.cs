@@ -32,7 +32,14 @@ public class GridBased : MonoBehaviour
         frontCollider.position = transform.position + new Vector3(lastDir.x, lastDir.y, 0);
         if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
+            anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
+            anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+            anim.SetBool("Walking", true);
             lastDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        }
+        else
+        {
+            anim.SetBool("Walking", false);
         }
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 

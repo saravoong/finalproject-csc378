@@ -1199,6 +1199,11 @@ Transform:
   - {fileID: 1513080508}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &414839762 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2524650296067883082, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+  m_PrefabInstance: {fileID: 1643757168}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &428358219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2288,7 +2293,6 @@ GameObject:
   - component: {fileID: 756836197}
   - component: {fileID: 756836200}
   - component: {fileID: 756836202}
-  - component: {fileID: 756836199}
   - component: {fileID: 756836204}
   - component: {fileID: 756836205}
   - component: {fileID: 756836206}
@@ -2370,29 +2374,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &756836199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756836196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 052308015794d473fbe4568681f3dd1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  sprintMultiplier: 2
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 392
-  blockedSound: {fileID: 8300000, guid: a7722aeca962a4e7a85cb4dab0d5cf7a, type: 3}
-  blockedSoundVolume: 30
-  blockedSoundCadence: 0.5
-  animator: {fileID: 756836202}
-  spriteRenderer: {fileID: 756836197}
-  lastMoveDirection: {x: 0, y: 0}
 --- !u!50 &756836200
 Rigidbody2D:
   serializedVersion: 5
@@ -2455,8 +2436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridBasedMovement: {fileID: 0}
-  animator: {fileID: 756836202}
-  spriteRenderer: {fileID: 756836197}
+  animator: {fileID: 414839762}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -56293,10 +56273,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 102502471503338699, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
-      propertyPath: maxHealth
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.06
@@ -56341,12 +56317,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 9061253694053440147, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 1643757169}
-    m_RemovedComponents:
-    - {fileID: 5447142911888755822, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
