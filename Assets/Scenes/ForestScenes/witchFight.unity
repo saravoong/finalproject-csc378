@@ -48031,6 +48031,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2931372046282567178, guid: 8912378d2cbf94e818292235adeaec92, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6662022901835338647, guid: c909d6243107740ee972acf8c8888e2b, type: 3}
     - target: {fileID: 4178047827474989417, guid: 8912378d2cbf94e818292235adeaec92, type: 3}
       propertyPath: bossHealthBar
       value: 
@@ -48042,6 +48046,18 @@ PrefabInstance:
     - target: {fileID: 5121307462416544724, guid: 8912378d2cbf94e818292235adeaec92, type: 3}
       propertyPath: m_Name
       value: BossEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737528861593932981, guid: 8912378d2cbf94e818292235adeaec92, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.27933615
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737528861593932981, guid: 8912378d2cbf94e818292235adeaec92, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.27933615
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737528861593932981, guid: 8912378d2cbf94e818292235adeaec92, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.27933615
       objectReference: {fileID: 0}
     - target: {fileID: 6737528861593932981, guid: 8912378d2cbf94e818292235adeaec92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48100,6 +48116,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8912378d2cbf94e818292235adeaec92, type: 3}
+--- !u!1001 &6065011875670273074
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.9889684
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.079709105
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 579769307195362517, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144861239452862573, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_Name
+      value: MeleeEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144861239452862573, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8f02f6408b3b84e208fc6bfabfd6898c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -48114,5 +48191,4 @@ SceneRoots:
   - {fileID: 1493355634}
   - {fileID: 1812140655}
   - {fileID: 1151954140}
-  - {fileID: 1775506350}
-  - {fileID: 1190784637}
+  - {fileID: 6065011875670273074}
