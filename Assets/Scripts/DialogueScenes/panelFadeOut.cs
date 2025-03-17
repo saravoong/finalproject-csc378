@@ -16,7 +16,12 @@ public class panelFadeOut : MonoBehaviour
     // }
 
     public void LoadNextLevel() {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene == "witchFight") {
+            StartCoroutine(LoadLevel(3)); // witch fight to baking 
+        } else {
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        }
 
     }
 
