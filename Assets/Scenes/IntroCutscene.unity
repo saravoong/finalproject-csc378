@@ -194,7 +194,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4280898629
-  m_fontColor: {r: 0.26936093, g: 0.3301887, b: 0.16042188, a: 1}
+  m_fontColor: {r: 0.07450981, g: 0.30980393, b: 0.36078432, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -370,17 +370,17 @@ MonoBehaviour:
     jewel."'
   - '"The remedy of all ills, the bringer uncomparable bliss."'
   - It's a story I always remember.
-  - Present day (blank screen)
+  - Present Day
   - 'Yaaawn. *hears a commotion outside* '
   - Beetrice sprints outside.
-  - 'Hear ye competition. '
+  - 'Hear ye, hear ye competition. '
   - I have to get the famous strawberry to ensure I win this competition!
   speaker:
   - ~~~
   - Mother
   - Mother
   - ~~~
-  - ---
+  - 
   - Beetrice
   - ~~~
   - Herald
@@ -1651,7 +1651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.3137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.53333336}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1997,7 +1997,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4280898629
-  m_fontColor: {r: 0.27058825, g: 0.32941177, b: 0.16078432, a: 1}
+  m_fontColor: {r: 0.07450981, g: 0.30980393, b: 0.36078432, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
