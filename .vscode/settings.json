@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "finalproject-csc378.sln"
+    "dotnet.defaultSolution": "Final Project.sln"
 }
