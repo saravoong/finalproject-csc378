@@ -432,9 +432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2904ca5c712414bdeb1a3b0cb7388038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  startHealth: 1
   absoluteMaxHealth: 10
   respawnPoint: {fileID: 0}
+  phUI: {fileID: 0}
 --- !u!114 &9061253694053440147
 MonoBehaviour:
   m_ObjectHideFlags: 0

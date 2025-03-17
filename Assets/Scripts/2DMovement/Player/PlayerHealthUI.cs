@@ -9,10 +9,7 @@ public class PlayerHealthUI : MonoBehaviour
     private Image[] hearts;
 
     void Start()
-    {
-        // Initialize UI based on player's max health
-        InitializeHearts();
-        
+    {        
         // Subscribe to health change events
         if (playerHealth != null)
         {
@@ -29,8 +26,9 @@ public class PlayerHealthUI : MonoBehaviour
         }
     }
 
-    void InitializeHearts()
+    public void InitializeHearts()
     {
+        Debug.Log("HELLO1");
         if (playerHealth == null || heartPrefab == null || heartsContainer == null)
         {
             Debug.LogError("PlayerHealthUI is missing required references!");
@@ -51,15 +49,6 @@ public class PlayerHealthUI : MonoBehaviour
         {
             Image newHeart = Instantiate(heartPrefab, heartsContainer);
             hearts[i] = newHeart;
-            
-            // Initially disable hearts beyond max health
-            hearts[i].enabled = (i < playerHealth.MaxHealth);
-            
-            // Make hearts beyond current health appear inactive
-            if (i >= playerHealth.CurrentHealth)
-            {
-                hearts[i].color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-            }
         }
         
         UpdateHealthUI();
@@ -67,22 +56,19 @@ public class PlayerHealthUI : MonoBehaviour
 
     void UpdateHealthUI()
     {
+        Debug.Log("HELLO2");
         if (hearts == null || playerHealth == null)
             return;
-        
+        Debug.Log("HELLO3");
         // Update visibility of heart containers based on max health
         for (int i = 0; i < hearts.Length; i++)
         {
+            Debug.Log("CH: " + playerHealth.CurrentHealth);
             // Only show hearts up to max health
-            hearts[i].enabled = (i < playerHealth.MaxHealth);
-            
-            // Active hearts for current health
-            if (hearts[i].enabled)
-            {
-                hearts[i].color = (i < playerHealth.CurrentHealth) 
-                    ? Color.white  // Active heart
-                    : new Color(0.5f, 0.5f, 0.5f, 0.5f);  // Inactive heart
-            }
+            hearts[i].enabled = (i < playerHealth.CurrentHealth);
+            Debug.Log("HELLO" + i);
+            Debug.Log("HELLO" + hearts[i].enabled);
+            hearts[i].color = Color.white;
         }
     }
 }

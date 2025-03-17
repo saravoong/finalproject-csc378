@@ -11,6 +11,8 @@ public class InstructionPanel: MonoBehaviour
     public bool playerIsClose;
     
     void Update() {
+        Debug.Log("playerIsClose: " + playerIsClose);
+        Debug.Log("collectible: " + collectible);
         if (playerIsClose && collectible) {
             instructionPanel.SetActive(true);
         } else {
