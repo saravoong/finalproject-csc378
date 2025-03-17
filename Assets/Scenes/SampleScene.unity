@@ -990,6 +990,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftCurtain: {fileID: 1368786455}
   rightCurtain: {fileID: 1466190585}
+  leftx: 0
+  rightx: 0
+  opencurtain: 0
 --- !u!1 &1368786454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,6 +1102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftCurtain: {fileID: 1368786455}
   rightCurtain: {fileID: 1466190585}
+  leftx: -2443
+  rightx: 628
+  opencurtain: 1
 --- !u!114 &1401782359
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ public class OpenCurtain : MonoBehaviour
     // Help from: https://gamedevbeginner.com/the-right-way-to-lerp-in-unity-with-examples/
     [SerializeField] private Image leftCurtain;
     [SerializeField] private Image rightCurtain;
+    [SerializeField] private float leftx;
+    [SerializeField] private float rightx;
+    [SerializeField] private bool opencurtain;
     private Canvas canvas;
     private float moveSpeed = 1f;
 
@@ -26,8 +29,11 @@ public class OpenCurtain : MonoBehaviour
         Vector3 leftStartPos = leftCurtain.rectTransform.anchoredPosition;
         Vector3 rightStartPos = rightCurtain.rectTransform.anchoredPosition;
 
-        Vector3 leftTargetPos = new Vector3(-2443f, 470.4186f, 0f);
-        Vector3 rightTargetPos = new Vector3(628f, 470.4186f, 0f);
+        //Vector3 leftTargetPos = new Vector3(-2443f, 470.4186f, 0f);
+        //Vector3 rightTargetPos = new Vector3(628f, 470.4186f, 0f);
+
+        Vector3 leftTargetPos = new Vector3(leftx, 470.4186f, 0f);
+        Vector3 rightTargetPos = new Vector3(rightx, 470.4186f, 0f);
 
         float duration = 0f;
         while (duration < 1f)
@@ -41,6 +47,9 @@ public class OpenCurtain : MonoBehaviour
 
         leftCurtain.rectTransform.anchoredPosition = leftTargetPos;
         rightCurtain.rectTransform.anchoredPosition = rightTargetPos;
-        canvas.gameObject.SetActive(false);
+        
+        if (opencurtain) {
+            canvas.gameObject.SetActive(false);
+        }
     }
 }
