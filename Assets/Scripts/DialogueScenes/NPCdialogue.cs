@@ -18,13 +18,14 @@ public class NPCdialogue : MonoBehaviour
     private int index;
     public float wordSpeed;
     public bool playerIsClose;
-    // public GameObject continueButton;
     
     void Update() {
-        if (playerIsClose) {
-            instructionPanel.SetActive(true);
-        } else {
-            instructionPanel.SetActive(false);
+        if (instructionPanel != null) {
+            if (playerIsClose) {
+                instructionPanel.SetActive(true);
+            } else {
+                instructionPanel.SetActive(false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.T) && playerIsClose) {
@@ -46,21 +47,18 @@ public class NPCdialogue : MonoBehaviour
                 }
             }
         }
-        // if (dialogueText.text == dialogue[index]) {
-        //     continueButton.SetActive(true);
-        // }
     }
 
     public void zeroText() {
+        StopAllCoroutines();    // resets dialogue chararray (to prevent the random characters after reset)
+        index = 0;
         dialogueText.text = "";
         speakerText.text = "";
-        index = 0;
         dialoguePanel.SetActive(false);
-        if (hideObj != null) {
-            hideObj.SetActive(false);
-        }
-        if (instructionPanel.activeInHierarchy) {
-            instructionPanel.SetActive(false);
+        if (instructionPanel != null) {
+            if (instructionPanel.activeInHierarchy) {
+                instructionPanel.SetActive(false);
+            }
         }
     }
 
@@ -79,6 +77,12 @@ public class NPCdialogue : MonoBehaviour
             dialogueText.text = "";
             StartCoroutine(Typing());
         } else {
+            // chip running away
+            if (hideObj != null) {
+                hideObj.SetActive(false);
+            }
+
+            // going to witch fight after conversation
             string activeScene = SceneManager.GetActiveScene().name;
             if (activeScene == "forestScene") {
                 //SceneManager.LoadScene(11);
@@ -95,16 +99,16 @@ public class NPCdialogue : MonoBehaviour
     }
 
     // forcing player to finish convo
-    // private void OnTriggerExit2D(Collider2D other) {
-    //     if (other.gameObject.name == "Player") {
-    //         playerIsClose = false;
-    //         zeroText();
-    //     }
-    // }
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.name == "Player") {
             playerIsClose = false;
+            zeroText();
         }
     }
+    // private void OnTriggerExit2D(Collider2D other) {
+    //     if (other.gameObject.name == "Player") {
+    //         playerIsClose = false;
+    //     }
+    // }
 
 }

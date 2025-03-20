@@ -9,7 +9,7 @@ public class randomizeBird : MonoBehaviour
     {
         // animator = GetComponent<Animator>();
         // animator.SetFloat("Offset", Random.Range(0f, 3f));
-        float randomRange = Random.Range(1.0f, 2.0f);
+        float randomRange = Random.Range(1.0f, 1.5f);
         transform.localScale = new Vector3(randomRange, randomRange, 0);
     }
 
