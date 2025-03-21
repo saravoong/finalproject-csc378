@@ -2,18 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
-using UnityEngine.SceneManagement;
 
-public class InstructionPanel: MonoBehaviour
+public class showOnContact : MonoBehaviour
 {
     public GameObject instructionPanel;
-    public GameObject collectible;
-    public bool playerIsClose;
-    
+    private bool playerIsClose;
+
     void Update() {
-        // Debug.Log("playerIsClose: " + playerIsClose);
-        // Debug.Log("collectible: " + collectible);
-        if (playerIsClose && collectible) {
+        if (playerIsClose) {
             instructionPanel.SetActive(true);
         } else {
             instructionPanel.SetActive(false);
@@ -26,9 +22,11 @@ public class InstructionPanel: MonoBehaviour
         }
     }
 
+    // forcing player to finish convo
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.name == "Player") {
             playerIsClose = false;
         }
     }
+
 }
