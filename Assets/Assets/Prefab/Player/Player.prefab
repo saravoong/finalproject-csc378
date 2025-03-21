@@ -420,6 +420,9 @@ MonoBehaviour:
     m_Bits: 256
   cellSize: {x: 0.9, y: 0.9}
   frontFacingCollider: {fileID: 8729790580434752052}
+  attackSound: {fileID: 8300000, guid: c25dd9732d0f844b8805e05849c850e9, type: 3}
+  whiffSound: {fileID: 8300000, guid: 4a0a3bb31c9e842c6be5e81618bcc3a6, type: 3}
+  attackSoundVolume: 100
 --- !u!114 &102502471503338699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +438,8 @@ MonoBehaviour:
   startHealth: 1
   absoluteMaxHealth: 10
   respawnPoint: {fileID: 0}
+  damageFlashDuration: 0.2
+  damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
   phUI: {fileID: 0}
 --- !u!114 &9061253694053440147
 MonoBehaviour:
@@ -456,6 +461,8 @@ MonoBehaviour:
   cellSize: {x: 0.9, y: 0.9}
   frontFacingCollider: {fileID: 8729790580434752052}
   healthPerCollectible: 1
+  collectSound: {fileID: 8300000, guid: e03b4c54a5e3541288a2d882ff99f47e, type: 3}
+  collectSoundVolume: 1
 --- !u!114 &5673746128236288581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,7 +482,10 @@ MonoBehaviour:
   movePoint: {fileID: 2884359605382249776}
   frontCollider: {fileID: 5122889547089531684}
   lastDir: {x: 0, y: 0}
-  blockedSound: {fileID: 8300000, guid: a7722aeca962a4e7a85cb4dab0d5cf7a, type: 3}
+  blockedSound: {fileID: 8300000, guid: 57ac0f1b731c4461bb00575629464cb1, type: 3}
   blockedSoundVolume: 30
   blockedSoundCadence: 0.5
+  footstepSound: {fileID: 8300000, guid: a48e53030855e4a6aa6d0f54c5098cbf, type: 3}
+  footstepVolume: 100
+  footstepThreshold: 0.988
   anim: {fileID: 2524650296067883082}

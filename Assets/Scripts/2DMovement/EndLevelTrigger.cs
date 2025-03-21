@@ -10,7 +10,6 @@ public class EndLevelTrigger : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            // SceneManager.LoadScene(endSceneName);
             levelLoader.LoadNextLevel();
         }
     }

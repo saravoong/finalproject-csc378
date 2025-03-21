@@ -8,12 +8,20 @@ public class BossBattleManager : MonoBehaviour
     public BossEnemyAI bossAI;
     public Collider2D bossCollider;
     public ParticleSystem poisonParticles;
-    public BossHealthBar bossHealthBar; // Reference to the boss health bar UI
-    public SpriteRenderer bossSpriteRenderer; // Reference to the boss sprite renderer
+    public BossHealthBar bossHealthBar;
+    public SpriteRenderer bossSpriteRenderer;
+
+    [Header("Boss Sprites")]
+    public Sprite initialStateSprite;
+    public Sprite combatStateSprite;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip initialStateSound;
 
     [Header("Visual Feedback")]
-    public Color vulnerableColor = new Color(1f, 0.7f, 0.7f); // Light red/pinkish
-    public float flashingSpeed = 0.2f; // Time between flashes
+    public Color vulnerableColor = new Color(1f, 0.7f, 0.7f);
+    public float flashingSpeed = 0.2f;
     private Color originalColor;
 
     [Header("Player Reference")]
@@ -29,12 +37,11 @@ public class BossBattleManager : MonoBehaviour
     public float initialWaitTime = 2f;
     public float summonDelay = 1f;
     public float vulnerableDuration = 5f;
-    public float warningFlashDuration = 2f; // Duration of flashing warning
+    public float warningFlashDuration = 2f;
     
     [Header("Positions")]
     public Vector3 startPosition;
 
-    // Battle state
     private enum BossState { Initial, Active, Vulnerable }
     private BossState currentState = BossState.Initial;
     
@@ -45,7 +52,6 @@ public class BossBattleManager : MonoBehaviour
     {
         startPosition = transform.position;
         
-        // Get components if not set
         if (bossAI == null)
             bossAI = GetComponent<BossEnemyAI>();
         
@@ -54,27 +60,28 @@ public class BossBattleManager : MonoBehaviour
             
         if (bossSpriteRenderer == null)
             bossSpriteRenderer = GetComponent<SpriteRenderer>();
+        
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
+        
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
             
-        // Store the original color
         if (bossSpriteRenderer != null)
             originalColor = bossSpriteRenderer.color;
             
-        // Set up the boss health bar if available
         SetupBossHealthBar();
             
-        // Start the battle cycle
         StartBattleCycle();
     }
     
     void SetupBossHealthBar()
     {
-        // If we don't have a reference to the health bar, try to find it
         if (bossHealthBar == null)
         {
             bossHealthBar = FindObjectOfType<BossHealthBar>();
         }
         
-        // Connect the boss health to the UI
         if (bossHealthBar != null)
         {
             BossHealth bossHealth = GetComponent<BossHealth>();
@@ -87,13 +94,10 @@ public class BossBattleManager : MonoBehaviour
     
     void Update()
     {
-        // Check if all minions are destroyed
         if (currentState == BossState.Active)
         {
-            // Clean up the list to remove any null references (destroyed minions)
             activeMinions.RemoveAll(minion => minion == null);
             
-            // If all minions are gone, enter vulnerable state
             if (activeMinions.Count == 0)
             {
                 EnterVulnerableState();
@@ -103,117 +107,123 @@ public class BossBattleManager : MonoBehaviour
     
     void StartBattleCycle()
     {
-        // Stop any existing battle cycle
         if (battleCycleCoroutine != null)
             StopCoroutine(battleCycleCoroutine);
         
-        // Stop any flashing effect    
         StopFlashingEffect();
             
-        // Start a new battle cycle
         battleCycleCoroutine = StartCoroutine(BattleCycle());
     }
     
     IEnumerator BattleCycle()
     {
-        // Phase 1: Initial phase
         currentState = BossState.Initial;
         Debug.Log("BossManager: Initial phase started");
         
-        // Make sure boss is at start position
+        if (bossSpriteRenderer != null && initialStateSprite != null)
+        {
+            bossSpriteRenderer.sprite = initialStateSprite;
+            Debug.Log("BossManager: Set initial state sprite");
+        }
+        
+        PlayInitialStateSound();
+        
         bossAI.TeleportTo(startPosition);
         
-        // Reset boss appearance
         ResetBossAppearance();
         
-        // Enable collider
         if (bossCollider != null) {
             poisonParticles.Play();
         }
             
-        // Stop any attacks
         bossAI.StopAttacking();
         
-        // Set health bar to normal color
         if (bossHealthBar != null)
             bossHealthBar.SetNormalColor();
         
-        // After summonDelay seconds, summon minions
         yield return new WaitForSeconds(summonDelay);
         SummonMinions();
         
-        // Wait the remainder of the initial wait time
         yield return new WaitForSeconds(initialWaitTime - summonDelay);
         
-        // Phase 2: Active phase - boss starts attacking
         currentState = BossState.Active;
+        
+        if (bossSpriteRenderer != null && combatStateSprite != null)
+        {
+            bossSpriteRenderer.sprite = combatStateSprite;
+            Debug.Log("BossManager: Set combat state sprite");
+        }
+        
         bossCollider.enabled = true;
         Debug.Log("BossManager: Active phase started");
         bossAI.StartAttacking();
-        
-        // The update method will now monitor minions and trigger vulnerable state
+    }
+    
+    void PlayInitialStateSound()
+    {
+        if (audioSource != null && initialStateSound != null)
+        {
+            audioSource.PlayOneShot(initialStateSound);
+            Debug.Log("BossManager: Playing initial state sound");
+        }
+        else if (initialStateSound == null)
+        {
+            Debug.LogWarning("BossManager: Initial state sound clip not assigned!");
+        }
     }
     
     void EnterVulnerableState()
     {
-        // Phase 3: Vulnerable phase
         currentState = BossState.Vulnerable;
         Debug.Log("BossManager: Vulnerable phase started");
         
-        // Stop boss attacks
         bossAI.StopAttacking();
         
-        // Disable collider
         if (bossCollider != null) {
             bossCollider.enabled = false;
             poisonParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
         
-        // Apply vulnerable appearance
         if (bossSpriteRenderer != null)
         {
+            if (combatStateSprite != null)
+            {
+                bossSpriteRenderer.sprite = combatStateSprite;
+            }
+            
             bossSpriteRenderer.color = vulnerableColor;
         }
         
-        // Change health bar to vulnerable color
         if (bossHealthBar != null)
             bossHealthBar.SetVulnerableColor();
             
-        // Start vulnerable timer
         StartCoroutine(VulnerableTimer());
     }
     
     IEnumerator VulnerableTimer()
     {
-        // Wait until it's time to start flashing
         float regularVulnerableTime = vulnerableDuration - warningFlashDuration;
         
         if (regularVulnerableTime > 0)
         {
             yield return new WaitForSeconds(regularVulnerableTime);
             
-            // Start the flashing warning
             StartFlashingEffect();
             
-            // Wait for the flashing duration
             yield return new WaitForSeconds(warningFlashDuration);
         }
         else
         {
-            // If vulnerable time is shorter than warning time, just wait the full duration
             yield return new WaitForSeconds(vulnerableDuration);
         }
         
-        // Restart the cycle
         StartBattleCycle();
     }
     
     void StartFlashingEffect()
     {
-        // Stop any existing flashing
         StopFlashingEffect();
         
-        // Start a new flashing coroutine
         flashingCoroutine = StartCoroutine(FlashingEffect());
         Debug.Log("BossManager: Warning flash started");
     }
@@ -233,7 +243,6 @@ public class BossBattleManager : MonoBehaviour
         
         while (true)
         {
-            // Toggle between vulnerable and original color
             if (bossSpriteRenderer != null)
             {
                 bossSpriteRenderer.color = showVulnerable ? vulnerableColor : originalColor;
@@ -246,7 +255,6 @@ public class BossBattleManager : MonoBehaviour
     
     void ResetBossAppearance()
     {
-        // Reset sprite to original color
         if (bossSpriteRenderer != null)
         {
             bossSpriteRenderer.color = originalColor;
@@ -255,10 +263,8 @@ public class BossBattleManager : MonoBehaviour
     
     void SummonMinions()
     {
-        // Clear any old minions
         activeMinions.Clear();
         
-        // Summon at position 1
         if (summonPoint1 != null && minionPrefab != null)
         {
             GameObject minion1 = Instantiate(minionPrefab, summonPoint1.position, Quaternion.identity);
@@ -267,7 +273,6 @@ public class BossBattleManager : MonoBehaviour
             Debug.Log("BossManager: Summoned minion 1");
         }
         
-        // Summon at position 2
         if (summonPoint2 != null && minionPrefab != null)
         {
             GameObject minion2 = Instantiate(minionPrefab, summonPoint2.position, Quaternion.identity);
@@ -279,8 +284,6 @@ public class BossBattleManager : MonoBehaviour
 
     void AssignPlayerToMinion(GameObject minion)
     {
-        // Find any component that might need the player reference
-        // First try EnemyAI specifically
         EnemyAI enemyAI = minion.GetComponent<EnemyAI>();
         if (enemyAI != null && playerTransform != null)
         {
@@ -289,8 +292,6 @@ public class BossBattleManager : MonoBehaviour
             return;
         }
         
-        // If no EnemyAI component found, try a more general approach with reflection
-        // This finds any component with a public Transform field named "player"
         MonoBehaviour[] components = minion.GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour component in components)
         {

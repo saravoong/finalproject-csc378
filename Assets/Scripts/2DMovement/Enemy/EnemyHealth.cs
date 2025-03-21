@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -8,12 +10,30 @@ public class EnemyHealth : MonoBehaviour
     private Color originalColor;
     public float damageFlashDuration = 0.1f;
     
+    private List<GameObject> activeProjectiles = new List<GameObject>();
+    
     void Start()
     {
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
+    }
+    
+    public void RegisterProjectile(GameObject projectile)
+    {
+        if (projectile != null)
+        {
+            activeProjectiles.Add(projectile);
+        }
+    }
+    
+    public void UnregisterProjectile(GameObject projectile)
+    {
+        if (projectile != null && activeProjectiles.Contains(projectile))
+        {
+            activeProjectiles.Remove(projectile);
+        }
     }
     
     public void TakeDamage(int damage)
@@ -38,6 +58,17 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log(gameObject.name + " has died.");
+        
+        foreach (GameObject projectile in activeProjectiles)
+        {
+            if (projectile != null)
+            {
+                Destroy(projectile);
+            }
+        }
+        
+        activeProjectiles.Clear();
+        
         Destroy(gameObject);
     }
 }

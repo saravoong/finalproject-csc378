@@ -10,7 +10,6 @@ public class PlayerHealthUI : MonoBehaviour
 
     void Start()
     {        
-        // Subscribe to health change events
         if (playerHealth != null)
         {
             playerHealth.OnHealthChanged += UpdateHealthUI;
@@ -19,7 +18,6 @@ public class PlayerHealthUI : MonoBehaviour
     
     void OnDestroy()
     {
-        // Unsubscribe from events when destroyed
         if (playerHealth != null)
         {
             playerHealth.OnHealthChanged -= UpdateHealthUI;
@@ -35,16 +33,13 @@ public class PlayerHealthUI : MonoBehaviour
             return;
         }
         
-        // Clear any existing hearts
         foreach (Transform child in heartsContainer)
         {
             Destroy(child.gameObject);
         }
         
-        // Create array to hold heart images
         hearts = new Image[playerHealth.absoluteMaxHealth];
         
-        // Instantiate heart images based on player's max health
         for (int i = 0; i < playerHealth.absoluteMaxHealth; i++)
         {
             Image newHeart = Instantiate(heartPrefab, heartsContainer);
@@ -60,11 +55,10 @@ public class PlayerHealthUI : MonoBehaviour
         if (hearts == null || playerHealth == null)
             return;
         Debug.Log("HELLO3");
-        // Update visibility of heart containers based on max health
+        
         for (int i = 0; i < hearts.Length; i++)
         {
             Debug.Log("CH: " + playerHealth.CurrentHealth);
-            // Only show hearts up to max health
             hearts[i].enabled = (i < playerHealth.CurrentHealth);
             Debug.Log("HELLO" + i);
             Debug.Log("HELLO" + hearts[i].enabled);

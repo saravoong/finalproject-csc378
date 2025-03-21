@@ -15,18 +15,20 @@ public class GridBased : MonoBehaviour
     public float blockedSoundCadence = 0.5f;
     private float lastBlockedSoundTime = -Mathf.Infinity;
     
+    public AudioClip footstepSound;
+    public float footstepVolume = 0.5f;
+    private bool hasPlayedStepSound = false;
+    [Range(0f, 1f)]
+    public float footstepThreshold = 0.5f;
+    
     public Animator anim;
-    // If you have an obstacle layer, it might be declared like this:
-    // public LayerMask obstacleLayer;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         movePoint.parent = null;
         lastDir = new Vector2(0f, -1f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         frontCollider.position = transform.position + new Vector3(lastDir.x, lastDir.y, 0);
@@ -41,10 +43,26 @@ public class GridBased : MonoBehaviour
         {
             anim.SetBool("Walking", false);
         }
+        
+        float distanceToMovePoint = Vector3.Distance(transform.position, movePoint.position);
+        
+        if (distanceToMovePoint > 0.05f)
+        {
+            float movementProgress = 1 - (distanceToMovePoint / 1f);
+            
+            if (movementProgress >= footstepThreshold && !hasPlayedStepSound && footstepSound != null)
+            {
+                AudioSource.PlayClipAtPoint(footstepSound, transform.position, footstepVolume);
+                hasPlayedStepSound = true;
+            }
+        }
+        
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
+            hasPlayedStepSound = false;
+            
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
                 if (!Physics2D.OverlapCircle(

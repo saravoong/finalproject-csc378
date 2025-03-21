@@ -7,6 +7,10 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayer; 
     public Vector2 cellSize = new Vector2(0.9f, 0.9f); 
     public BoxCollider2D frontFacingCollider;
+    public AudioClip attackSound;
+    public AudioClip whiffSound;
+
+    public float attackSoundVolume = 1f;
 
     
     void Update()
@@ -26,6 +30,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D enemyHit = Physics2D.OverlapBox(targetPos, cellSize, 0f, enemyLayer);
         if (enemyHit != null && enemyHit.CompareTag("Enemy"))
         {
+            AudioSource.PlayClipAtPoint(attackSound, enemyHit.transform.position, attackSoundVolume);
             EnemyHealth enemyHealth = enemyHit.GetComponent<EnemyHealth>();
             BossHealth bossHealth = enemyHit.GetComponent<BossHealth>();
 
@@ -36,6 +41,9 @@ public class PlayerCombat : MonoBehaviour
             {
                 bossHealth.TakeDamage(1);
             }
+        } else {
+            Debug.Log("PLAY WHIFF SOUND");
+            AudioSource.PlayClipAtPoint(whiffSound, transform.position, attackSoundVolume);
         }
     }
 }

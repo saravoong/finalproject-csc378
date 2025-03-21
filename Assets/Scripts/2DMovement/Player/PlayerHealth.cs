@@ -1,14 +1,22 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int startHealth = 3;
-    public int absoluteMaxHealth = 10; // Maximum number of hearts the player can have
+    public int absoluteMaxHealth = 10;
     private int currentHealth;
     public Transform respawnPoint;
     
-    // Event that will be triggered when health changes
+    [Header("Damage Flash Effect")]
+    public float damageFlashDuration = 0.2f;
+    public Color damageFlashColor = Color.red;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+    private bool isFlashing = false;
+    
     public event Action OnHealthChanged;
 
     public PlayerHealthUI phUI;
@@ -16,20 +24,35 @@ public class PlayerHealth : MonoBehaviour
     public int CurrentHealth { get { return currentHealth; } }
     public int StartHealth { get { return startHealth; } }
     
-    void Start()
+    void Awake()
     {
-        // Check if we have a GameManager with persisted health data
-        if (GameManager.Instance != null)
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
         {
-            // Set absolute max health to match the GameManager
-            absoluteMaxHealth = GameManager.Instance.playerMaxHealth;
-            
-            // Let GameManager handle the initialization - it will call SetHealth()
-            // GameManager will also call phUI.InitializeHearts()
+            originalColor = spriteRenderer.color;
         }
         else
         {
-            // No GameManager found, use default initialization
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                originalColor = spriteRenderer.color;
+            }
+            else
+            {
+                Debug.LogWarning("No SpriteRenderer found on player or children. Damage flash effect will be disabled.");
+            }
+        }
+    }
+    
+    void Start()
+    {
+        if (GameManager.Instance != null)
+        {
+            absoluteMaxHealth = GameManager.Instance.playerMaxHealth;
+        }
+        else
+        {
             currentHealth = startHealth;
         }
         
@@ -44,22 +67,43 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (spriteRenderer != null && !isFlashing)
+        {
+            StartCoroutine(FlashDamage());
+        }
+        
         currentHealth -= damage;
         Debug.Log("Player took " + damage + " damage. Health now: " + currentHealth);
         
-        // Save health to GameManager
         if (GameManager.Instance != null)
         {
             GameManager.Instance.SavePlayerHealth(currentHealth);
         }
         
-        // Notify listeners that health has changed
         OnHealthChanged?.Invoke();
         
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    IEnumerator FlashDamage()
+    {
+        isFlashing = true;
+        
+        if (originalColor == Color.clear)
+        {
+            originalColor = spriteRenderer.color;
+        }
+        
+        spriteRenderer.color = damageFlashColor;
+        
+        yield return new WaitForSeconds(damageFlashDuration);
+        
+        spriteRenderer.color = originalColor;
+        
+        isFlashing = false;
     }
 
     public bool AddHealth(int amount)
@@ -74,51 +118,38 @@ public class PlayerHealth : MonoBehaviour
         
         Debug.Log("Player health increased to: " + currentHealth);
         
-        // Save health to GameManager
         if (GameManager.Instance != null)
         {
             GameManager.Instance.SavePlayerHealth(currentHealth);
         }
         
-        // Notify listeners that health has changed
         OnHealthChanged?.Invoke();
         
         return true;
     }
 
-    // New method to set health from GameManager
     public void SetHealth(int healthValue)
     {
         currentHealth = Mathf.Clamp(healthValue, 0, absoluteMaxHealth);
         
         Debug.Log($"Player health set to {currentHealth}");
         
-        // Notify listeners that health has changed
         OnHealthChanged?.Invoke();
     }
 
     void Die()
     {
         Debug.Log("Player has died.");
-        Respawn();
-    }
-
-    void Respawn()
-    {
-        currentHealth = startHealth;
-        if(respawnPoint != null)
-        {
-            transform.position = respawnPoint.position;
-        }
-        Debug.Log("Player respawned. Health restored to " + currentHealth);
         
-        // Save respawned health to GameManager
-        if (GameManager.Instance != null)
+        if (DeathScreenManager.Instance != null)
         {
-            GameManager.Instance.SavePlayerHealth(currentHealth);
+            DeathScreenManager.Instance.ShowDeathScreen();
         }
-        
-        // Notify listeners that health has changed
-        OnHealthChanged?.Invoke();
+        else
+        {
+            Debug.LogWarning("DeathScreenManager not found. Reloading scene directly.");
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+        }
     }
 }

@@ -9,18 +9,103 @@ public class EnemyAI : MonoBehaviour
     public float moveSpeed = 4f;
     public float pauseDuration = 2f;
     public GameObject attackPrefab;
-
+    
+    public float detectionRadius = 8f;
+    
+    public float floatAmplitude = 0.2f;
+    public float floatFrequency = 1.5f;
+    
+    public float projectileSpeed = 5f;
+    public float attackDelay = 0.3f;
+    
+    private Animator animator;
+    private static readonly int AttackTrigger = Animator.StringToHash("Attack");
+    
+    private SpriteRenderer spriteRenderer;
+    private bool isFacingLeft = true;
+    
+    private EnemyHealth healthComponent;
+    
     private bool isMoving = false;
+    private bool playerDetected = false;
     private BoxCollider2D boxCollider;
-
+    private Vector3 startPosition;
+    private float floatTimer = 0f;
+    private Coroutine enemyLoopCoroutine;
+    
     void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        healthComponent = GetComponent<EnemyHealth>();
     }
 
     void Start()
     {
-        StartCoroutine(EnemyLoop());
+        startPosition = transform.position;
+        
+        UpdateSpriteDirection(true);
+    }
+    
+    void Update()
+    {
+        ApplyFloatingEffect();
+        
+        CheckPlayerDetection();
+    }
+    
+    void CheckPlayerDetection()
+    {
+        if (player == null) return;
+        
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        
+        if (distanceToPlayer <= detectionRadius)
+        {
+            if (!playerDetected)
+            {
+                playerDetected = true;
+                enemyLoopCoroutine = StartCoroutine(EnemyLoop());
+            }
+        }
+        else
+        {
+            if (playerDetected)
+            {
+                playerDetected = false;
+                if (enemyLoopCoroutine != null)
+                {
+                    StopCoroutine(enemyLoopCoroutine);
+                    enemyLoopCoroutine = null;
+                }
+            }
+        }
+    }
+    
+    void UpdateSpriteDirection(bool faceLeft)
+    {
+        if (isFacingLeft != faceLeft)
+        {
+            isFacingLeft = faceLeft;
+            spriteRenderer.flipX = !faceLeft;
+        }
+    }
+    
+    void ApplyFloatingEffect()
+    {
+        if (!isMoving)
+        {
+            floatTimer += Time.deltaTime;
+            float yOffset = Mathf.Sin(floatTimer * floatFrequency) * floatAmplitude;
+            Vector3 currentPosition = transform.position;
+            
+            transform.position = new Vector3(
+                currentPosition.x,
+                Mathf.RoundToInt(currentPosition.y) + yOffset,
+                currentPosition.z
+            );
+        }
     }
 
     IEnumerator EnemyLoop()
@@ -32,9 +117,11 @@ public class EnemyAI : MonoBehaviour
                 Vector2Int enemyPos = Vector2Int.RoundToInt(transform.position);
                 Vector2Int playerPos = Vector2Int.RoundToInt(player.position);
 
+                UpdateSpriteDirection(playerPos.x < enemyPos.x);
+
                 if (Vector2Int.Distance(enemyPos, playerPos) <= 1)
                 {
-                    Attack();
+                    StartCoroutine(AttackCoroutine());
                 }
                 else
                 {
@@ -48,22 +135,39 @@ public class EnemyAI : MonoBehaviour
                             for (int i = 1; i <= steps; i++)
                             {
                                 Vector3 targetPos = new Vector3(path[i].x, path[i].y, transform.position.z);
+                                
+                                Vector2 moveDirection = targetPos - transform.position;
+                                if (Mathf.Abs(moveDirection.x) > 0.1f)
+                                {
+                                    UpdateSpriteDirection(moveDirection.x < 0);
+                                }
+                                
                                 yield return StartCoroutine(MoveToPosition(targetPos));
                             }
                         }
                     }
-                    Attack();
+                    StartCoroutine(AttackCoroutine());
                 }
             }
             yield return new WaitForSeconds(pauseDuration);
         }
     }
 
-    void Attack()
+    IEnumerator AttackCoroutine()
     {
+        if (animator != null)
+        {
+            animator.SetTrigger(AttackTrigger);
+        }
+        
         Vector2Int enemyPos = Vector2Int.RoundToInt(transform.position);
         Vector2Int playerPos = Vector2Int.RoundToInt(player.position);
         Vector2Int attackDir = playerPos - enemyPos;
+        
+        if (attackDir.x != 0)
+        {
+            UpdateSpriteDirection(attackDir.x < 0);
+        }
 
         if (Mathf.Abs(attackDir.x) > Mathf.Abs(attackDir.y))
         {
@@ -75,15 +179,76 @@ public class EnemyAI : MonoBehaviour
             attackDir.x = 0;
             attackDir.y = (attackDir.y > 0) ? 1 : -1;
         }
-        Vector2Int attackCell = enemyPos + attackDir;
-        Vector3 attackPos = new Vector3(attackCell.x, attackCell.y, transform.position.z);
-        GameObject attackObj = Instantiate(attackPrefab, attackPos, Quaternion.identity);
-        Destroy(attackObj, 0.5f);
+        
+        Vector2 projectileDirection = new Vector2(attackDir.x, attackDir.y).normalized;
+        
+        float rotationAngle = 0f;
+        
+        if (attackDir.x < 0)
+        {
+            rotationAngle = -90f;
+        }
+        else if (attackDir.x > 0)
+        {
+            rotationAngle = 90f;
+        }
+        else if (attackDir.y > 0)
+        {
+            rotationAngle = 180f;
+        }
+        
+        Vector3 spawnPos = transform.position + new Vector3(attackDir.x * 0.5f, attackDir.y * 0.5f, 0);
+        
+        Quaternion rotation = Quaternion.Euler(0, 0, rotationAngle);
+        GameObject projectile = Instantiate(attackPrefab, spawnPos, rotation);
+        
+        if (healthComponent != null)
+        {
+            healthComponent.RegisterProjectile(projectile);
+        }
+        
+        Vector3 originalScale = projectile.transform.localScale;
+        
+        projectile.transform.localScale = Vector3.zero;
+        
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < attackDelay)
+        {
+            if (this == null || projectile == null)
+                yield break;
+                
+            float t = elapsedTime / attackDelay;
+            
+            float scaleFactor = Mathf.SmoothStep(0, 1, t);
+            projectile.transform.localScale = originalScale * scaleFactor;
+            
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        if (this == null || projectile == null)
+            yield break;
+            
+        projectile.transform.localScale = originalScale;
+        
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            rb = projectile.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 0f;
+        }
+        
+        rb.linearVelocity = projectileDirection * projectileSpeed;
+        
+        ProjectileCleanup cleanup = projectile.AddComponent<ProjectileCleanup>();
+        cleanup.Initialize(healthComponent, 2f);
     }
 
     IEnumerator MoveToPosition(Vector3 targetPos)
     {
         isMoving = true;
+        floatTimer = 0f;
         Vector3 startPos = transform.position;
         float timeToMove = 1f / moveSpeed;
         float elapsedTime = 0f;
@@ -194,5 +359,11 @@ public class EnemyAI : MonoBehaviour
         if (pos == playerPos)
             return false;
         return hit == null;
+    }
+    
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

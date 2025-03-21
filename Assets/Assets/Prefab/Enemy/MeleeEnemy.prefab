@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5636384991031746623}
   - component: {fileID: 4783234421866477543}
   - component: {fileID: 4414096667415761287}
+  - component: {fileID: 3132149912022553886}
   m_Layer: 8
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -76,10 +77,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1920781881
-  m_SortingLayer: 4
+  m_SortingLayerID: 969896285
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 315349795352424782, guid: 49faea623186640708aa6ad12a89feb6, type: 3}
+  m_Sprite: {fileID: -8496399968298113383, guid: 450f4e520051247268407392f31aade8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,17 +125,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.20802021, y: -0.071668625}
+  m_Offset: {x: -0.058832645, y: 0.1833446}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 4.27}
+    oldSize: {x: 3.95, y: 3.51}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.8271766, y: 3.0084171}
+  m_Size: {x: 3.0946002, y: 3.1247163}
   m_EdgeRadius: 0
 --- !u!114 &4783234421866477543
 MonoBehaviour:
@@ -154,7 +155,12 @@ MonoBehaviour:
     m_Bits: 8
   moveSpeed: 4
   pauseDuration: 2
-  attackPrefab: {fileID: 8295617386140634958, guid: ab68e28f13b7d4338a735610d2399f76, type: 3}
+  attackPrefab: {fileID: 8295617386140634958, guid: 108a3252f5e534a92a218438df6d3e9d, type: 3}
+  detectionRadius: 8
+  floatAmplitude: 0.2
+  floatFrequency: 1.5
+  projectileSpeed: 5
+  attackDelay: 0.3
 --- !u!114 &4414096667415761287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +175,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   damageFlashDuration: 0.1
+--- !u!95 &3132149912022553886
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144861239452862573}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 39f3be2caa48c456faabe2288838c93e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

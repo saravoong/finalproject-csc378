@@ -8,9 +8,10 @@ public class PlayerCollector : MonoBehaviour
     public Vector2 cellSize = new Vector2(0.9f, 0.9f);
     public BoxCollider2D frontFacingCollider;
     
-    // Amount of health to add for each collectible
     public int healthPerCollectible = 1;
-
+    
+    public AudioClip collectSound;
+    public float collectSoundVolume = 1f;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -31,29 +32,10 @@ public class PlayerCollector : MonoBehaviour
         if (hit != null && hit.CompareTag("Collectible"))
         {
             Debug.Log("Collected: " + hit.gameObject.name);
+            bool success = playerHealth.AddHealth(healthPerCollectible);
+            AudioSource.PlayClipAtPoint(collectSound, hit.transform.position, collectSoundVolume);
             
-            // Try to add health to the player
-            if (playerHealth != null)
-            {
-                bool success = playerHealth.AddHealth(healthPerCollectible);
-                
-                // Only destroy the collectible if it was successfully used
-                if (success)
-                {
-                    // You could add effects or animations here
-                    Destroy(hit.gameObject);
-                }
-                else
-                {
-                    Debug.Log("Player already has maximum health. Collectible not used.");
-                }
-            }
-            else
-            {
-                // Destroy anyway if no playerHealth reference
-                Destroy(hit.gameObject);
-                Debug.LogError("PlayerHealth reference is missing in PlayerCollector!");
-            }
+            Destroy(hit.gameObject);
         }
     }
 
