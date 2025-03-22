@@ -6,6 +6,7 @@ public class ProgressBarStrawberry : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private Button nextStepButton;
+    [SerializeField] public FillingCustardTransition custardTransition;
     public AudioClip doneSoundEffect;
     private AudioSource audioSource;
 
@@ -18,8 +19,9 @@ public class ProgressBarStrawberry : MonoBehaviour
         slider.value += currentValue;
 
         if (slider.value >= slider.maxValue) {
+            StartCoroutine(custardTransition.FadeIn()); 
             audioSource.PlayOneShot(doneSoundEffect);
-            Invoke("EnableNextStepButton", 0.5f);
+            Invoke("EnableNextStepButton", 1.2f);
         }
     }
 
