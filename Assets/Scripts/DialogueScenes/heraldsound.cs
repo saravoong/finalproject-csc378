@@ -14,7 +14,7 @@ public class heraldsound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialoguetext.text.Contains("Present day (blank screen)")) {
+        if (dialoguetext.text.Contains("Present Day")) {
             audioSource.Play();
         }
     }
