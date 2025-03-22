@@ -77,7 +77,7 @@ public class dialoguescene : MonoBehaviour
             //zeroText();
             string activeScene = SceneManager.GetActiveScene().name;
             if (activeScene == "IntroCutscene") {
-                SceneManager.LoadScene(9);
+                SceneManager.LoadScene(8);
             }
         }
     }
