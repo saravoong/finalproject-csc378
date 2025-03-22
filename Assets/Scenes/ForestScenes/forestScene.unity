@@ -57742,6 +57742,10 @@ PrefabInstance:
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 2103775510}
+    - target: {fileID: 102502471503338699, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
+      propertyPath: dialogueObject
+      value: 
+      objectReference: {fileID: 1963970868}
     - target: {fileID: 226348536052696449, guid: ca7724f90dfd544f18e79953ff64efab, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6

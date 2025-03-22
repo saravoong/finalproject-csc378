@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private bool isFlashing = false;
+    public GameObject dialogueObject;
+    private bool inDialouge = false;
     
     public event Action OnHealthChanged;
 
@@ -65,8 +67,23 @@ public class PlayerHealth : MonoBehaviour
         phUI.InitializeHearts();
     }
 
+    void Update() {
+        string activeScene = SceneManager.GetActiveScene().name;
+        if (activeScene == "forestScene") {
+            if (dialogueObject != null && dialogueObject.activeSelf) {
+                Debug.Log("Player currently in dialouge scene, cannot get hurt");
+                inDialouge = true;
+            }
+        }
+
+    }
+
     public void TakeDamage(int damage)
     {
+        if (inDialouge) {
+            return;
+        }
+
         if (spriteRenderer != null && !isFlashing)
         {
             StartCoroutine(FlashDamage());
