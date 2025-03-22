@@ -593,8 +593,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -223.2, y: -162.8}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -357, y: -350}
+  m_SizeDelta: {x: 320.1367, y: 72.4013}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &226132757
 GameObject:
@@ -47642,8 +47642,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -47835,7 +47835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1656783863
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47921,7 +47921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1577045061934467160, guid: e9c50cadaad95458190f6a709320297a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4124073722729104144, guid: e9c50cadaad95458190f6a709320297a, type: 3}
       propertyPath: m_Pivot.x
@@ -48067,7 +48067,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
