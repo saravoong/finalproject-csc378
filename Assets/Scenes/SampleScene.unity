@@ -567,17 +567,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game by Sahil Goel, Joenna Yaya, Sara Voong, and Wing Sum Siu
-
-    Art
-    Assets created by Joenna Yaya
-
-
-    Tutorial Credits:
-
-    ...
-
-'
+  m_text: "Game by Sahil Goel, Joenna Yaya, Sara Voong, and Wing Sum Siu\nArt Assets
+    created by Joenna Yaya (Intro, Forest, Ending - Krita) & Sara Voong (Baking -
+    Google Drawings) & Wing Sum Siu (Bird - Piskel, Keybind indicators - Google Drawings)\nSound
+    Effect Assets created by Sara Voong (Baking Sound Effect) \nMusic Assets created
+    by Sara Voong (Garage Band)\n\nTutorial Credits:\n(Text dialogue)\n5 Minute DIALOGUE
+    SYSTEM in UNITY Tutorial\nhttps://www.youtube.com/watch?v=8oTYabhj248\n\n(Dialogue
+    trigger if player is close)\nUNITY 2D NPC DIALOGUE SYSTEM TUTORIAL: https://www.youtube.com/watch?v=1nFNOyCalzo
+    \n\n(Drag and Drop)\nDrag & Drop 2D | World-Space 2D Objects | C# | Unity Game
+    Engine:\nhttps://www.youtube.com/watch?v=CKQY8MdtBLI \n\n(4-way grid-based movement)\nHow
+    to make 4-Way Grid Based Movement and Animations in Unity | Unity Tutorials\nhttps://www.youtube.com/watch?v=1YKfBh1FCWY"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -604,8 +603,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
